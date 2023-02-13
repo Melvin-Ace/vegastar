@@ -1,0 +1,337 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Home{% endblock title %}
+
+{% block banner_slider %}
+
+            <div class="row">
+{#                    the sidebar area#}
+                  <div class="leftcolumn">
+                    <div class="container">
+                        <nav>
+                            <ul class="mcd-menu">
+                                <li>
+                                    <a href="{% url 'category' 'LP' %}" class="active">
+                                        <strong>Laptops</strong>
+                                        <small>Check out our different brands</small>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'category' 'DC' %}">
+                                        <strong>Desktop Computers</strong>
+                                        <small>Check out different CPUs</small>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'category' 'MN' %}">
+                                        <strong>Monitors</strong>
+                                        <small>Different sizes and brands</small>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'category' 'SS' %}">
+                                        <strong>Sound System</strong>
+                                        <small>Check for woofers and sub-woofers</small>
+                                    </a>
+{#                                    <ul>#}
+{#                                        <li><a href="#"><i class="fa fa-globe"></i> Mission</a></li>#}
+{#                                        <li>#}
+{#                                            <a href="#"><i class="fa fa-group"></i> Our Team</a>#}
+{#                                            <ul>#}
+{#                                                <li><a href="#"><i class="fa fa-female"></i> Leyla Sparks</a></li>#}
+{#                                                <li>#}
+{#                                                <a href="#"><i class="fa fa-male"></i> Gleb Ismailov</a>#}
+{#                                                    <ul>#}
+{#                                                        <li><a href="#"><i class="fa fa-leaf"></i> About</a></li>#}
+{#                                                        <li><a href="#"><i class="fa fa-tasks"></i> Skills</a></li>#}
+{#                                                    </ul>#}
+{#                                                </li>#}
+{#                                                <li><a href="#"><i class="fa fa-female"></i> Viktoria Gibbers</a></li>#}
+{#                                            </ul>#}
+{#                                        </li>#}
+{#                                        <li><a href="#"><i class="fa fa-trophy"></i> Rewards</a></li>#}
+{#                                        <li><a href="#"><i class="fa fa-certificate"></i> Certificates</a></li>#}
+{#                                    </ul>#}
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'category' 'LA' %}">
+                                            <strong>Laptop Accessories</strong>
+                                            <small>Free installation</small>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'category' 'SM' %}">
+                                            <strong>Storage and Memory</strong>
+                                            <small>SSDs HDDs and RAMs</small>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'category' 'ND' %}">
+                                            <strong>Networking Devices</strong>
+                                            <small>Networking needs</small>
+                                        </a>
+                                    </li>
+                                </ul>
+                        </nav>
+                    </div>
+                  </div>
+
+{#                the slider area#}
+                  <div class="centercolumn">
+                     <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+                        <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="4" aria-label="Slide 5"></button>
+                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="5" aria-label="Slide 6"></button>
+                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="6" aria-label="Slide 7"></button>
+                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="7" aria-label="Slide 6"></button>
+                        </div>
+
+                        <div class="carousel-inner">
+                            <div class="carousel-item active" data-bs-interval="100">
+                              <img src="{% static 'app/images/banner/b1.jpg' %}" class="d-block w-100" alt="...">
+{#                              <div class="carousel-caption d-none d-md-block">#}
+{#                                <h5>First slide label</h5>#}
+{#                                <p>Some representative placeholder content for the first slide.</p>#}
+{#                              </div>#}
+                            </div>
+                            <div class="carousel-item" data-bs-interval="100">
+                              <img src="{% static 'app/images/banner/b2.jpg' %}" class="d-block w-100" alt="..." >
+{#                              <div class="carousel-caption d-none d-md-block">#}
+{#                                <h5>Second slide label</h5>#}
+{#                                <p>Some representative placeholder content for the second slide.</p>#}
+{#                              </div>#}
+                            </div>
+                            <div class="carousel-item" data-bs-interval="100">
+                              <img src="{% static 'app/images/banner/b2.jpg' %}" class="d-block w-100" alt="..." >
+{#                              <div class="carousel-caption d-none d-md-block">#}
+{#                                <h5>Second slide label</h5>#}
+{#                                <p>Some representative placeholder content for the second slide.</p>#}
+{#                              </div>#}
+                            </div>
+                            <div class="carousel-item" data-bs-interval="100">
+                              <img src="{% static 'app/images/banner/b2.jpg' %}" class="d-block w-100" alt="..." >
+{#                              <div class="carousel-caption d-none d-md-block">#}
+{#                                <h5>Second slide label</h5>#}
+{#                                <p>Some representative placeholder content for the second slide.</p>#}
+{#                              </div>#}
+                            </div>
+                            <div class="carousel-item" data-bs-interval="100">
+                              <img src="{% static 'app/images/banner/b2.jpg' %}" class="d-block w-100" alt="..." >
+{#                              <div class="carousel-caption d-none d-md-block">#}
+{#                                <h5>Second slide label</h5>#}
+{#                                <p>Some representative placeholder content for the second slide.</p>#}
+{#                              </div>#}
+                            </div>
+                            <div class="carousel-item" data-bs-interval="100">
+                              <img src="{% static 'app/images/banner/b2.jpg' %}" class="d-block w-100" alt="..." >
+{#                              <div class="carousel-caption d-none d-md-block">#}
+{#                                <h5>Second slide label</h5>#}
+{#                                <p>Some representative placeholder content for the second slide.</p>#}
+{#                              </div>#}
+                            </div>
+                            <div class="carousel-item" data-bs-interval="100">
+                              <img src="{% static 'app/images/banner/b2.jpg' %}" class="d-block w-100" alt="..." >
+{#                              <div class="carousel-caption d-none d-md-block">#}
+{#                                <h5>Second slide label</h5>#}
+{#                                <p>Some representative placeholder content for the second slide.</p>#}
+{#                              </div>#}
+                            </div>
+                            <div class="carousel-item" data-bs-interval="100">
+                              <img src="{% static 'app/images/banner/b3.jpg' %}" class="d-block w-100" alt="...">
+{#                              <div class="carousel-caption d-none d-md-block">#}
+{#                                <h5>Third slide label</h5>#}
+{#                                <p>Some representative placeholder content for the third slide.</p>#}
+{#                              </div>#}
+                            </div>
+                            </div>
+                          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                          </button>
+                          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                          </button>
+                        </div>
+                    </div>
+                     <div class="rightcolumn">
+                            <div>
+                              <div class="card">
+                              <h2>TITLE HEADING</h2>
+                              <h5>Title description, Dec 7, 2017</h5>
+                            </div><br>
+                            <div class="card">
+                              <h2>TITLE HEADING</h2>
+                              <h5>Title description, Dec 7, 2017</h5>
+                            </div>
+                        </div>
+
+                    </div>
+            </div>
+
+{% endblock banner_slider %}
+
+{% block main-content %}
+
+        <div class="container">
+{#            <h2 class="text-center">Welcome to VegaStar Technologies</h2>#}
+            <div class="row container">
+                <div class="col-sm-4 mi-go wow fadeInUp" data-wow-duration="1s"
+                    data-wow-delay="0.6s" style="animation-duration: 1s; animation-delay: 0.6s;
+                    animation-name: none;">
+                    <div class="goodnesssec buttermilk smbg">
+                        <a href="{% url 'category' 'NA' %}">
+                            <div class="goodnessseccont text-center">
+                                <img src="{% static 'app/images/product/Hp.jpg' %}"
+                                 class="img-responsive center-block" alt="">
+                                <p class="mlkpro">New Arrivals</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-sm-4 col-sm-4 mi-go wow fadeInUp" data-wow-duration="1s"
+                    data-wow-delay="0.6s" style="animation-duration: 1s; animation-delay: 0.6s;
+                    animation-name: none;">
+                    <div class="goodnesssec buttermilk smbg">
+                        <a href={% url 'category' 'LP' %}>
+                            <div class="goodnessseccont text-center">
+                                <img src="{% static 'app/images/product/Dell.png' %}"
+                                 class="img-responsive center-block" alt="">
+                                <p class="mlkpro">Laptops</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-sm-4 col-sm-4 mi-go wow fadeInUp" data-wow-duration="1s"
+                    data-wow-delay="0.6s" style="animation-duration: 1s; animation-delay: 0.6s;
+                    animation-name: none ;">
+                    <div class="goodnesssec buttermilk smbg">
+                        <a href="{% url 'category' 'DC' %}">
+                            <div class="goodnessseccont text-center">
+                                <img src="{% static 'app/images/product/lenovo.png' %}"
+                                 class="img-responsive center-block" alt="">
+                                <p class="mlkpro">Desktop Computers</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <br/><br/>
+
+                <div class="row container">
+                    <div class="col-sm-4 col-sm-4 mi-go wow fadeInUp" data-wow-duration="1s"
+                        data-wow-delay="0.6s" style="animation-duration: 1s; animation-delay: 0.6s;
+                        animation-name: none;">
+                        <div class="goodnesssec buttermilk smbg">
+                            <a href={% url 'category' 'MN' %}>
+                                <div class="goodnessseccont text-center">
+                                    <img src="{% static 'app/images/product/samsung.png' %}"
+                                     class="img-responsive center-block" alt="">
+                                    <p class="mlkpro">Monitors</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4 col-sm-4 mi-go wow fadeInUp" data-wow-duration="1s"
+                        data-wow-delay="0.6s" style="animation-duration: 1s; animation-delay: 0.6s;
+                        animation-name: none;">
+                        <div class="goodnesssec buttermilk curdbgpro">
+                            <a href={% url 'category' 'TV' %}>
+                                <div class="goodnessseccont text-center">
+                                    <img src="{% static 'app/images/product/charger.jpg' %}"
+                                     class="img-responsive center-block" alt="">
+                                    <p class="mlkpro">Televisions</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4 col-sm-4 mi-go wow fadeInUp" data-wow-duration="1s"
+                        data-wow-delay="0.6s" style="animation-duration: 1s; animation-delay: 0.6s;
+                        animation-name: none;">
+                        <div class="goodnesssec buttermilk smbg">
+                            <a href={% url 'category' 'SS' %}>
+                                <div class="goodnessseccont text-center">
+                                    <img src="{% static 'app/images/product/dahua_logo.png' %}"
+                                     class="img-responsive center-block" alt="">
+                                    <p class="mlkpro">Sound Systems</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <br><br>
+
+                <div class="row container">
+                    <div class="col-sm-4 col-sm-4 mi-go wow fadeInUp" data-wow-duration="1s"
+                        data-wow-delay="0.6s" style="animation-duration: 1s; animation-delay: 0.6s;
+                        animation-name: none;">
+                        <div class="goodnesssec buttermilk smbg">
+                            <a href={% url 'category' 'SM' %}>
+                                <div class="goodnessseccont text-center">
+                                    <img src="{% static 'app/images/product/samsung.png' %}"
+                                     class="img-responsive center-block" alt="">
+                                    <p class="mlkpro">Storage & Memory</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4 col-sm-4 mi-go wow fadeInUp" data-wow-duration="1s"
+                        data-wow-delay="0.6s" style="animation-duration: 1s; animation-delay: 0.6s;
+                        animation-name: none;">
+                        <div class="goodnesssec buttermilk curdbgpro">
+                            <a href={% url 'category' 'LA' %}>
+                                <div class="goodnessseccont text-center">
+                                    <img src="{% static 'app/images/product/charger.jpg' %}"
+                                     class="img-responsive center-block" alt="">
+                                    <p class="mlkpro">Laptop Accessories</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4 col-sm-4 mi-go wow fadeInUp" data-wow-duration="1s"
+                        data-wow-delay="0.6s" style="animation-duration: 1s; animation-delay: 0.6s;
+                        animation-name: none;">
+                        <div class="goodnesssec buttermilk smbg">
+                            <a href={% url 'category' 'ND' %}>
+                                <div class="goodnessseccont text-center">
+                                    <img src="{% static 'app/images/product/dahua_logo.png' %}"
+                                     class="img-responsive center-block" alt="">
+                                    <p class="mlkpro">Networking Devices</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <br><br>
+                <div class="row container">
+                    <div class="col-sm-4 col-sm-4 mi-go wow fadeInUp" data-wow-duration="1s"
+                        data-wow-delay="0.6s" style="animation-duration: 1s; animation-delay: 0.6s;
+                        animation-name: none;">
+                        <div class="goodnesssec buttermilk smbg">
+                            <a href={% url 'category' 'TT' %}>
+                                <div class="goodnessseccont text-center">
+                                    <img src="{% static 'app/images/product/samsung.png' %}"
+                                     class="img-responsive center-block" alt="">
+                                    <p class="mlkpro">Trending Technologies</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    <br/><br/><br/><br/><br/><br>
+
+{% endblock main-content %}
+

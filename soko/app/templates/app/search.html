@@ -1,0 +1,43 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Search Results{% endblock title %}
+{% block main-content %}
+
+
+{#    <div class="row">#}
+{#        {% for prod in product %}#}
+{#            <div class="col-3 text-centre mb-4 hove-shadow">#}
+{#                <a href="{% url 'product-detail' prod.id %}">#}
+{#                    <div>#}
+{#                        <img src="{{prod.product_image.url}}" width="300" height="200" />#}
+{#                        <div class="fw-bold">{{prod.title}}</div>#}
+{#                        <div class="fw-bold text-danger">#}
+{#                            Ksh.{{ prod.discounted_price }}/-<br>#}
+{#                        <small class="fw-light text-decoration-line-through">Ksh. {{prod.selling_price}}</small>#}
+{#                    </div>#}
+{#                </a>#}
+{#            </div>#}
+{#        {% endfor %}#}
+{#    </div>#}
+
+    <div class="row" style="margin-top: 15px; margin-right: 100px; margin-bottom: 10px; margin-left: 100px;">
+            {% for prod in product %}
+            <div class="col-sm-3">
+                <div class="card">
+                    <img src="{{prod.product_image.url}}" class="card-img-top" width="300" height="200">
+                    <div class="card-body">
+                        <h7 class="card-title">{{prod.title}}</h7>
+                        <p class="card-text fw-bold text-danger">
+                            Ksh. {{prod.discounted_price}}/-<br>
+                            <small class="fw-light text-decoration-line-through">Ksh. {{prod.selling_price}}</small>
+                        </p>
+                    </div>
+                    <a href="{% url 'product-detail' prod.id %}" class="btn btn-primary px-2 py-2 ms-2">Details</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+
+
+{% endblock main-content %}
