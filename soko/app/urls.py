@@ -5,6 +5,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_view
 from .forms import LoginForm, MyPasswordResetForm, MyPasswordChangeForm, MySetPasswordForm
+from django.urls import path, include
+
 
 urlpatterns = [
     path("", views.home, name="home" ),
@@ -16,11 +18,12 @@ urlpatterns = [
     path('profile/', views.ProfileView.as_view(), name='profile'),
     path('address/', views.address, name='address'),
     path('updateAddress/<int:pk>',views.updateAddress.as_view(), name='updateAddress'),
+    # path('payments/', include('django_razorpay.urls', namespace="django_razorpay")),
 
     path('add-to-cart/', views.add_to_cart, name='add-to-cart'),
     path('cart/', views.show_cart, name='showcart'),
     path('checkout/', views.checkout.as_view(), name='checkout'),
-    # path('paymentdone/', views.payment_done, name='paymentdone'),
+    path('paymentdone/', views.payment_done, name='paymentdone'),
     path('orders/', views.orders, name='orders'),
 
     path('search/', views.search, name='search'),

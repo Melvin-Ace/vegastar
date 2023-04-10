@@ -2,7 +2,7 @@ from django.db.models import Count
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.views import View
-import razorpay
+import django_razorpay
 from .models import Cart, Product, Customer, Payment, OrderPlaced, Wishlist
 from .forms import CustomerProfileForm, CustomerRegistrationForm
 from django.contrib import messages
@@ -206,12 +206,12 @@ class checkout(View):
             famount = famount + value
         totalamount = famount + 500
         razoramount = int(totalamount * 100)
-        client = razorpay.Client(auth=(settings.RAZOR_KEY_ID, settings.RAZOR_KEY_SECRET))
+        # client = django_razorpay(auth=(settings.RAZOR_KEY_ID, settings.RAZOR_KEY_SECRET))
         data = {"amount": razoramount, "currency": "INR", "receipt": "order_rcptid_12"}
-        payment_response = client.order.create(data=data)
-        print(payment_response)
-        order_id = payment_response['id']
-        order_status = payment_response['status']
+        # payment_response = client.order.create(data=data)
+        # print(payment_response)
+        # order_id = payment_response['id']
+        # order_status = payment_response['status']
         if order_status == 'created':
             payment = Payment(
                 user=user,

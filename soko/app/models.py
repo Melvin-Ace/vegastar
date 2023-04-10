@@ -2,8 +2,7 @@ from enum import auto
 
 from django.db import models
 from django.contrib.auth.models import User
-from mptt.fields import TreeForeignKey
-from mptt.models import MPTTModel
+from mptt.models import MPTTModel, TreeForeignKey
 
 # create your models here.
 STATE_CHOICES = (
@@ -67,7 +66,6 @@ CATEGORY_CHOICES=(
     ('LA','Laptop-Accessories'),
     ('ND','Networking-Devices'),
     ('TT','Trending-Technology'),
-
 )
 
 # class SubCategory(models.Model):
@@ -84,36 +82,44 @@ CATEGORY_CHOICES=(
 #     description = models.TextField()
 #     composition = models.TextField(default='')
 #     prodapp = models.TextField(default='')
-#     category = models.ForeignKey(CATEGORY_CHOICES, on_delete=models.CASCADE)
-#     sub_category = models.ForeignKey(SubCategory, on_delete=models.CASCADE, blank=True, null=True)
+#     category = models.CharField(choices=CATEGORY_CHOICES, max_length=2)
+#     # sub_category = models.ForeignKey(SubCategory, on_delete=models.CASCADE, blank=True, null=True)
 #     product_image = models.ImageField(upload_to='product')
+#
+#     def __str__(self):
+#         return self.title
 
-# class Category(MPTTModel):
-#     STATUS = (
-#         ('True', 'True'),
-#         ('False', 'False'),
-#     )
-#     parent = TreeForeignKey('self',blank=True, null=True , related_name='children', on_delete=models)
-#     title = models.CharField(max_length=30)
-#     keywords = models.CharField(max_length=255)
-#     description = models.CharField(max_length=255)
-#     image = models.ImageField(blank=True, upload_to='images/')
-#     status = models.CharField(max_length=10, choices=STATUS)
-#     slug = models.SlugField()
-#     create_at = models.DateTimeField(auto_now_add=True)
-#     update_at = models.DateTimeField(auto_now = True)
+class Category(MPTTModel):
+    STATUS = (
+        ('True', 'True'),
+        ('False', 'False'),
+    )
+    parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
+    title = models.CharField(max_length=30, unique=True)
+    keywords = models.CharField(max_length=255)
+    description = models.CharField(max_length=255)
+    image = models.ImageField(blank=True, upload_to='images/')
+    status = models.CharField(max_length=10, choices=STATUS)
+    slug = models.SlugField()
+    create_at = models.DateTimeField(auto_now_add=True)
+    update_at = models.DateTimeField(auto_now=True)
 
-    # def __str__(self):
-    #     return self.title
-    # class MPTTMeta:
-    #     order_insertion_by = ['title']
+    def __str__(self):
+        return self.title
+    class MPTTMeta:
+        order_insertion_by = ['title']
 
 
 class Product(models.Model):
+    STATUS = (
+        ('True', 'True'),
+        ('False', 'False'),
+    )
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     selling_price = models.FloatField()
     discounted_price = models.FloatField()
-    description = models.TextField()
+    description = models.CharField(max_length=255)
     composition = models.TextField(default='')
     prodapp = models.TextField(default='')
     category = models.CharField(choices=CATEGORY_CHOICES, max_length=2)
@@ -156,13 +162,13 @@ STATUS_CHOICES =  (
     ('pending', 'Pending'),
 )
 
-class Payment(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    amount = models.FloatField()
-    razorpay_order_id = models.CharField(max_length=100,blank=True,null=True)
-    razorpay_payment_status = models.CharField(max_length=100,blank=True,null=True)
-    razorpay_payment_id = models.CharField(max_length=100,blank=True,null=True)
-    paid = models.BooleanField(default=False)
+# class Payment(models.Model):
+#     user = models.ForeignKey(User, on_delete=models.CASCADE)
+#     amount = models.FloatField()
+#     razorpay_order_id = models.CharField(max_length=100,blank=True,null=True)
+#     razorpay_payment_status = models.CharField(max_length=100,blank=True,null=True)
+#     razorpay_payment_id = models.CharField(max_length=100,blank=True,null=True)
+#     paid = models.BooleanField(default=False)
 
 
 class OrderPlaced(models.Model):
@@ -172,7 +178,7 @@ class OrderPlaced(models.Model):
     quantity = models.PositiveIntegerField(default=1)
     ordered_date = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=50,choices=STATUS_CHOICES, default='pending')
-    payment = models.ForeignKey(Payment, on_delete=models.CASCADE,default="")
+    # payment = models.ForeignKey(Payment, on_delete=models.CASCADE,default="")
     @property
     def total_cost(self):
         return self.quantity * self.product.discounted_price
