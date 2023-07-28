@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.views import View
 import django_razorpay
-from .models import Cart, Product, Customer, Payment, OrderPlaced, Wishlist
+from .models import Cart, Product, Customer, OrderPlaced, Wishlist
 from .forms import CustomerProfileForm, CustomerRegistrationForm
 from django.contrib import messages
 from django.db.models import Q
