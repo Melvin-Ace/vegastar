@@ -2,6 +2,7 @@ from enum import auto
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User
 
 # create your models here.
 STATE_CHOICES = (
@@ -55,17 +56,17 @@ STATE_CHOICES = (
 )
 
 class Main_Category(models.Model):
-    name = models.CharField(max_length=100)
+    man_name = models.CharField(max_length=100)
 
     def __str__(self):
-        return self.name
+        return self.man_name
 
 class Category(models.Model):
     main_category = models.ForeignKey(Main_Category, on_delete=models.CASCADE, blank=True, null=True, default=None)
-    name = models.CharField(max_length=100)
+    cat_name = models.CharField(max_length=100)
 
     def __str__(self):
-        return self.name + " __ " + self.main_category.name
+        return self.cat_name + " __ " + self.main_category.man_name
 
 class Sub_Category(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True, null=True, default=None)
@@ -75,75 +76,44 @@ class Sub_Category(models.Model):
         return self.name
 
 class Product(models.Model):
+    main_category = models.ForeignKey(Main_Category, on_delete=models.CASCADE, blank=True, null=True, default=None)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True, null=True, default=None)
     sub_category = models.ForeignKey(Sub_Category, on_delete=models.CASCADE, blank=True, null=True, default=None)
     title = models.CharField(max_length=100, default='')
     selling_price = models.FloatField(default=0.0)
     discounted_price = models.FloatField(default=0.0)
-    short_description = models.TextField(max_length=150, default='')
-    product_description = models.TextField(max_length=250, default='')
-    keywords = models.CharField(max_length=255, default='')
-    product_image = models.ImageField(blank=True, upload_to='product')
+    short_description = models.TextField(max_length=250, default='')
+    product_description = models.TextField(max_length=400, default='')
+    keywords = models.CharField(max_length=100, default='')
+    product_image_1 = models.ImageField(blank=True, upload_to='product')
+    product_image_2 = models.ImageField(blank=True, upload_to='product')
+    product_image_3 = models.ImageField(blank=True, upload_to='product')
+    product_image_4 = models.ImageField(blank=True, upload_to='product')
     create_at = models.DateTimeField(default=timezone.now)
     update_at = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return self.title
 
-# class Category(MPTTModel):
-#     STATUS = (
-#         ('True', 'True'),
-#         ('False', 'False'),
-#     )
-#     parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
-#     title = models.CharField(max_length=30, unique=True)
-#     keywords = models.CharField(max_length=255)
-#     description = models.CharField(max_length=255)
-#     image = models.ImageField(blank=True, upload_to='images/')
-#     status = models.CharField(max_length=10, choices=STATUS)
-#     slug = models.SlugField()
-#     create_at = models.DateTimeField(auto_now_add=True)
-#     update_at = models.DateTimeField(auto_now=True)
-#
-#     def __str__(self):
-#         return self.title
-#     class MPTTMeta:
-#         order_insertion_by = ['title']
-
-
-# class Product(models.Model):
-#     sub_category = models.ForeignKey(Category, on_delete=models.CASCADE)
-#     title = models.CharField(max_length=100)
-    # STATUS = (
-    #     ('True', 'True'),
-    #     ('False', 'False'),
-    # )
-    # # category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    # title = models.CharField(max_length=100)
-    # selling_price = models.FloatField()
-    # discounted_price = models.FloatField()
-    # description = models.CharField(max_length=255)
-    # composition = models.TextField(default='')
-    # prodapp = models.TextField(default='')
-    # category = models.CharField(choices=CATEGORY_CHOICES, max_length=2)
-    # product_image = models.ImageField(upload_to='product')
-
-    #
-    # def __str__(self):
-    #     return self.title
-
 class Customer(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    profile_picture = models.ImageField(blank=True, upload_to='profile_pics')
     firstname = models.CharField(max_length=50, null=True)
     lastname = models.CharField(max_length=50, null=True)
     email = models.EmailField(max_length=50, null=True)
-    mobile = models.IntegerField(default=0)
+    mobile = models.IntegerField(default=254)
     county = models.CharField(choices=STATE_CHOICES, max_length=100, null=True)
     local_town = models.CharField(max_length=50, null=True)
-
-
+    birthday = models.DateField(null=True)
+    SEX_CHOICES = (
+        ('M', 'Male'),
+        ('F', 'Female'),
+        ('O', 'Other'),
+    )
+    sex = models.CharField(choices=SEX_CHOICES, max_length=1, null=True)
 
     def __str__(self):
-        return self.name
+        return self.firstname
 
 class Cart(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)

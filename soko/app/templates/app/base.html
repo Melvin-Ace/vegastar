@@ -8,6 +8,12 @@
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
 
+    <!-- Link to Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- Link to FontAwesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
           rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
@@ -22,7 +28,7 @@
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
 
-    <link rel="stylesheet" href="{% static 'app/css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'app/css/style.css' %}"/>
 {#    <link rel="stylesheet" href="{% static 'app/css/owl.carousel.min.css' %}" />#}
 {#    <link rel="stylesheet" href="{% static 'app/css/all.min.css' %}" />#}
 {#    <link rel="stylesheet" href="{% static 'app/css/style.css' %}" />#}
@@ -118,7 +124,7 @@
                             <a href="{% url 'about' %}" class="nav-item nav-link">About</a>
                             <a href="contact.html" class="nav-item nav-link">Contact</a>
                         </div>
-                        <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
+                        <div class="navbar-nav ml-auto py-0 d-none d-lg-flex align-items-center">
                             <a href="" class="btn px-0">
                                 <i class="fas fa-heart text-primary"></i>
                                 <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
@@ -127,14 +133,20 @@
                                 <i class="fas fa-shopping-cart text-primary"></i>
                                 <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
                             </a>
-                            <a class="fas fa-user btn-sm text-primary dropdown-toggle" href="{{request.user}}"
-                               id="navbarDropdown"  data-bs-toggle="dropdown"></a>
-                                <ul class="dropdown-menu right" aria-labelledby="profileDropdown">
+                            <!-- Added a div with "d-flex" class to wrap the user icon and dropdown menu -->
+                            <div class="d-flex align-items-center">
+                                <!-- Removed "a" tag and used a "button" tag to create the dropdown toggle -->
+                                <button class="btn btn-sm text-primary dropdown-toggle" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-user"></i>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                                    <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
                                     <li><a class="dropdown-item" href="{% url 'login' %}">Log in</a></li>
                                     <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
-                                    <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'customerregistration' %}">Register</a></li>
                                     <li><a class="dropdown-item" href="{% url 'passwordchange' %}">Change Password</a></li>
-                               </ul>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </nav>

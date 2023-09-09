@@ -18,7 +18,6 @@ urlpatterns = [
     path('profile/', views.ProfileView.as_view(), name='profile'),
     path('address/', views.address, name='address'),
     path('updateAddress/<int:pk>',views.updateAddress.as_view(), name='updateAddress'),
-    # path('payments/', include('django_razorpay.urls', namespace="django_razorpay")),
 
     path('add-to-cart/', views.add_to_cart, name='add-to-cart'),
     path('cart/', views.show_cart, name='showcart'),
@@ -49,6 +48,6 @@ urlpatterns = [
 
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-admin.site.site_header = "VegaStar Technologies"
+admin.site.site_header = "VegaStar Technologies Administrator"
 admin.site.site_title = "VegaStar Technologies"
-admin.site.site_index_title = "Welcome to VegaStar Technologies Shop"
+admin.site.site_index_title = "Welcome to VegaStar Technologies Dashboard"

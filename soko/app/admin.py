@@ -1,35 +1,38 @@
 from django.contrib import admin
 from mptt.admin import DraggableMPTTAdmin
 
-from .models import *
-from .models import Cart, Product, Customer, OrderPlaced, Wishlist, Category
+from .models import Product
+from .models import Main_Category, Category, Sub_Category, Product, Customer, Cart, OrderPlaced, Wishlist
 from django.utils.html import format_html
 from django.urls import reverse
 from django.contrib.auth.models import Group
 
 # Register your models here.
-
-@admin.register(Customer)
 class CustomerModelAdmin(admin.ModelAdmin):
-    list_display = ['id', 'user', 'firstname', 'lastname', 'email', 'mobile', 'county', 'local_town']
+    list_display = ['id', 'user', 'firstname', 'lastname', 'email', 'mobile', 'county', 'local_town', 'birthday', 'sex']
 
-admin.register(Main_Category)
 class Main_CategoryModelAdmin(admin.ModelAdmin):
-    list_display = ['name']
+    list_display = ['man_name']
 
-admin.register(Category)
 class CategoryModelAdmin(admin.ModelAdmin):
-    list_display = ['name']
+    list_display = ['cat_name', 'main_category']
+    raw_id_fields = ['main_category']
+    search_fields = ['man_name']
 
-admin.register(Sub_Category)
+
 class SubCategoryModelAdmin(admin.ModelAdmin):
-    list_display = ['name']
+    list_display = ['name', 'category']
+    raw_id_fields = ['category']
+    search_fields = ['title', 'category__name']
 
-@admin.register(Product)
+
 class ProductModelAdmin(admin.ModelAdmin):
-    list_display = ['title']
+    list_display = ['id', 'title', 'selling_price', 'category', 'sub_category']
+    search_fields = ['title', 'category__name', 'sub_category__name']
+    raw_id_fields = ['category', 'sub_category']
+    autocomplete_fields = ['category', 'sub_category']
 
-@admin.register(Cart)
+
 class CartModelAdmin(admin.ModelAdmin):
     list_display = ['id', 'user', 'products', 'quantity']
 
@@ -37,13 +40,12 @@ class CartModelAdmin(admin.ModelAdmin):
         link = reverse("admin:app_product_change", args=[obj.product.pk])
         return format_html('<a href="{}">{}</a>', link, obj.product.title)
 
-@admin.register(OrderPlaced)
 class OrderPlacedModelAdmin(admin.ModelAdmin):
     list_display = ['id', 'user', 'customers', 'products', 'quantity', 'ordered_date', 'status', 'payments']
 
     def customers(self, obj):
         link = reverse("admin:app_customer_change", args=[obj.customer.pk])
-        return format_html('<a href="{}">{}</a>', link, obj.customer.name)
+        return format_html('<a href="{}">{}</a>', link, obj.customer.firstname)
 
     def products(self, obj):
         link = reverse("admin:app_product_change", args=[obj.product.pk])
@@ -54,7 +56,6 @@ class OrderPlacedModelAdmin(admin.ModelAdmin):
         return format_html('<a href="{}">{}</a>', link, obj.payment.razorpay_payment_id)
 
 
-@admin.register(Wishlist)
 class WishlistModelAdmin(admin.ModelAdmin):
     list_display = ['id', 'user', 'products']
 
@@ -70,52 +71,16 @@ class ProductAdmin:
 class Images:
     pass
 
+
+admin.site.register(Customer, CustomerModelAdmin)
+admin.site.register(Main_Category, Main_CategoryModelAdmin)
+admin.site.register(Category, CategoryModelAdmin)
+admin.site.register(Sub_Category, SubCategoryModelAdmin)
+admin.site.register(Product, ProductModelAdmin)
+admin.register(Cart)
+admin.site.register(OrderPlaced)
+admin.site.register(Wishlist)
+
 admin.site.unregister(Group)
 
-# @admin.register(Product)
-# class ProductModelAdmin(admin.ModelAdmin):
-#     list_display = ['id', 'title', 'discounted_price', 'category', 'product_image']
 
-
-# class CategoryAdmin2(DraggableMPTTAdmin):
-#     mptt_indent_field = "title"
-#     list_display = ('tree_actions', 'indented_title',
-#                     'related_products_count', 'related_products_cumulative_count')
-#     list_display_links = ('indented_title',)
-#
-#     def get_queryset(self, request):
-#         qs = super().get_queryset(request)
-#
-#         # Add cumulative product count
-#         qs = Category.objects.add_related_count(
-#             qs,
-#             Product,
-#             'category',
-#             'products_cumulative_count',
-#             cumulative=True)
-#
-#         # Add non cumulative product count
-#         qs = Category.objects.add_related_count(qs,
-#                                                 Product,
-#                                                 'category',
-#                                                 'products_count',
-#                                                 cumulative=False)
-#         return qs
-#
-#     def related_products_count(self, instance):
-#         return instance.products_count
-#
-#     related_products_count.short_description = 'Related products (for this specific category)'
-#
-#     def related_products_cumulative_count(self, instance):
-#         return instance.products_cumulative_count
-#
-#     related_products_cumulative_count.short_description = 'Related products (in tree)'
-
-
-# admin.site.register(Images)
-
-# @admin.register(Payment)
-# class PaymentModelAdmin(admin.ModelAdmin):
-#     list_display = ['id', 'user', 'amount', 'razorpay_order_id', 'razorpay_payment_status', 'razorpay_payment_id',
-#                     'paid']
